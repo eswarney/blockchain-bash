@@ -1,0 +1,1165 @@
+{
+  "contractName": "Tickets",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ticket_price",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "party_time",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "guest_list",
+      "outputs": [
+        {
+          "name": "guest_hash",
+          "type": "address"
+        },
+        {
+          "name": "guest_name",
+          "type": "string"
+        },
+        {
+          "name": "number_guests",
+          "type": "uint256"
+        },
+        {
+          "name": "purchased",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "partiers",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "max_headcount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "min_headcount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "max",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "min",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "price",
+          "type": "uint256"
+        },
+        {
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "TicketsPurchased",
+      "type": "constructor",
+      "payable": false,
+      "stateMutability": "nonpayable"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "_guests",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "_purchaser",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "_name",
+          "type": "string"
+        }
+      ],
+      "name": "TicketsPurchased",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "_message",
+          "type": "string"
+        }
+      ],
+      "name": "PartyOn",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "_message",
+          "type": "string"
+        }
+      ],
+      "name": "FullHouse",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b60405160808061057483398101604052808051906020019091908051906020019091908051906020019091908051906020019091905050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156100e157600080fd5b8360028190555082600381905550816005819055508060048190555050505050610464806101106000396000f30060606040526004361061008e576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806319d41c69146100935780632ba954b3146100bc5780638da5cb5b146100e5578063a861db591461013a578063bb7a6e0714610238578063daba072114610261578063ed54e5a61461028a578063f2fde38b146102b3575b600080fd5b341561009e57600080fd5b6100a66102ec565b6040518082815260200191505060405180910390f35b34156100c757600080fd5b6100cf6102f2565b6040518082815260200191505060405180910390f35b34156100f057600080fd5b6100f86102f8565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561014557600080fd5b61015b600480803590602001909190505061031d565b604051808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001848152602001831515151581526020018281038252858181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156102265780601f106101fb57610100808354040283529160200191610226565b820191906000526020600020905b81548152906001019060200180831161020957829003601f168201915b50509550505050505060405180910390f35b341561024357600080fd5b61024b610388565b6040518082815260200191505060405180910390f35b341561026c57600080fd5b61027461038e565b6040518082815260200191505060405180910390f35b341561029557600080fd5b61029d610394565b6040518082815260200191505060405180910390f35b34156102be57600080fd5b6102ea600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190505061039a565b005b60055481565b60045481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60068181548110151561032c57fe5b90600052602060002090600402016000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169080600101908060020154908060030160009054906101000a900460ff16905084565b60015481565b60025481565b60035481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156103f557600080fd5b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505600a165627a7a723058208ee3c662605d01d4c0e97ca506f0ff5878ec89ad7606396bb5d678eef6519e770029",
+  "deployedBytecode": "0x60606040526004361061008e576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806319d41c69146100935780632ba954b3146100bc5780638da5cb5b146100e5578063a861db591461013a578063bb7a6e0714610238578063daba072114610261578063ed54e5a61461028a578063f2fde38b146102b3575b600080fd5b341561009e57600080fd5b6100a66102ec565b6040518082815260200191505060405180910390f35b34156100c757600080fd5b6100cf6102f2565b6040518082815260200191505060405180910390f35b34156100f057600080fd5b6100f86102f8565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561014557600080fd5b61015b600480803590602001909190505061031d565b604051808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001848152602001831515151581526020018281038252858181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156102265780601f106101fb57610100808354040283529160200191610226565b820191906000526020600020905b81548152906001019060200180831161020957829003601f168201915b50509550505050505060405180910390f35b341561024357600080fd5b61024b610388565b6040518082815260200191505060405180910390f35b341561026c57600080fd5b61027461038e565b6040518082815260200191505060405180910390f35b341561029557600080fd5b61029d610394565b6040518082815260200191505060405180910390f35b34156102be57600080fd5b6102ea600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190505061039a565b005b60055481565b60045481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60068181548110151561032c57fe5b90600052602060002090600402016000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169080600101908060020154908060030160009054906101000a900460ff16905084565b60015481565b60025481565b60035481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156103f557600080fd5b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505600a165627a7a723058208ee3c662605d01d4c0e97ca506f0ff5878ec89ad7606396bb5d678eef6519e770029",
+  "sourceMap": "49:1864:0:-;;;1078:165;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;123:10:1;115:5;;:18;;;;;;;;;;;;;;;;;;209:5;;;;;;;;;;;195:19;;:10;:19;;;187:28;;;;;;;;1168:3:0;1152:13;:19;;;;1191:3;1175:13;:19;;;;1213:5;1198:12;:20;;;;1235:4;1222:10;:17;;;;1078:165;;;;49:1864;;;;;;",
+  "deployedSourceMap": "49:1864:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;314:24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;254:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;53:20:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;735:27:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;78:20;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;147:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;201;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;251:96:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;314:24:0;;;;:::o;254:22::-;;;;:::o;53:20:1:-;;;;;;;;;;;;;:::o;735:27:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;78:20::-;;;;:::o;147:25::-;;;;:::o;201:::-;;;;:::o;251:96:1:-;209:5;;;;;;;;;;;195:19;;:10;:19;;;187:28;;;;;;;;328:8;320:5;;:16;;;;;;;;;;;;;;;;;;251:96;:::o",
+  "source": "pragma solidity ^0.4.2;\n\n import \"./owned.sol\";\n\ncontract Tickets is owned {\n\nuint public partiers; //current number of people coming to the party\nuint public max_headcount; //max number of attendees \nuint public min_headcount; //min number of attendees\nuint public party_time; //stores time and date of the party\nuint public ticket_price; //ticket price\n\t\t\t\t\t\t  //in the future the price will be made dependent on the \n\t\t\t\t\t\t  //price of party supplies\n\nstruct Guests { //creating struct that will hold info about party guests\n\n\taddress guest_hash; //what's their address? \n\tstring guest_name; //what's their name?\n\tuint number_guests; //how many people are they bringing?\n\tbool purchased; //have they already purchased a ticket??\n}\n\nGuests [] public guest_list; //array of Guests objects \n\n\nevent TicketsPurchased(uint _guests, address _purchaser,  string _name); //event to signal ticket purchase\nevent PartyOn(string _message); //signals when min headcount has been met, let's Party On! \nevent FullHouse(string _message); // signals when tickets have been sold out (lit) \n\n\nfunction Tickets (uint max, uint min, uint price, uint time) onlyOwner {\n\tmax_headcount = max; \n\tmin_headcount = min; \n\tticket_price = price; \n\tparty_time = time; \n}\n\n// function buyTickets (Guests guest) returns (string message) { // in future modifier will be added to make sure same address isn't buying another ticket\n// \tif (max_headcount - (partiers + guest.number_guests) < 0){\n// \t \treturn (\"Sorry, not enough tickets left\"); \n// \t}\n\n// \telse {\n// \t \t\tpartiers += guest.number_guests; \n// \t \t\t\tif (partiers == min_headcount){\n// \t \t\t\t\t PartyOn(\"Reached minimum headcount. Time to Party!\"); \n// \t \t\t\t}\n\n// \t \t\t\telse if (partiers == max_headcount){\n// \t \t\t\t\tFullHouse(\"Tickets are now sold out. Prepare for a major ranger.\"); \n// \t \t\t\t}\n// \t \t}\t\t\n\n// \treturn (\"Tickets purchased\"); \n\n// \t}\n// \treturn (\"hello, testing\"); \n// }\n\n}\n",
+  "sourcePath": "/Users/emmaswarney/Desktop/rip_tilt/blockchain-bash/contracts/Tickets.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/emmaswarney/Desktop/rip_tilt/blockchain-bash/contracts/Tickets.sol",
+      "exportedSymbols": {
+        "Tickets": [
+          73
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".2"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 111,
+          "absolutePath": "/Users/emmaswarney/Desktop/rip_tilt/blockchain-bash/contracts/owned.sol",
+          "file": "./owned.sol",
+          "scope": 74,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 2,
+        "name": "ImportDirective",
+        "src": "26:21:0"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            110
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            73,
+            110
+          ],
+          "name": "Tickets",
+          "scope": 74
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "owned",
+                  "referencedDeclaration": 110,
+                  "type": "contract owned"
+                },
+                "id": 3,
+                "name": "UserDefinedTypeName",
+                "src": "69:5:0"
+              }
+            ],
+            "id": 4,
+            "name": "InheritanceSpecifier",
+            "src": "69:5:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "partiers",
+              "scope": 73,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint",
+                  "type": "uint256"
+                },
+                "id": 5,
+                "name": "ElementaryTypeName",
+                "src": "78:4:0"
+              }
+            ],
+            "id": 6,
+            "name": "VariableDeclaration",
+            "src": "78:20:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "max_headcount",
+              "scope": 73,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint",
+                  "type": "uint256"
+                },
+                "id": 7,
+                "name": "ElementaryTypeName",
+                "src": "147:4:0"
+              }
+            ],
+            "id": 8,
+            "name": "VariableDeclaration",
+            "src": "147:25:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "min_headcount",
+              "scope": 73,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint",
+                  "type": "uint256"
+                },
+                "id": 9,
+                "name": "ElementaryTypeName",
+                "src": "201:4:0"
+              }
+            ],
+            "id": 10,
+            "name": "VariableDeclaration",
+            "src": "201:25:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "party_time",
+              "scope": 73,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint",
+                  "type": "uint256"
+                },
+                "id": 11,
+                "name": "ElementaryTypeName",
+                "src": "254:4:0"
+              }
+            ],
+            "id": 12,
+            "name": "VariableDeclaration",
+            "src": "254:22:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "ticket_price",
+              "scope": 73,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "uint",
+                  "type": "uint256"
+                },
+                "id": 13,
+                "name": "ElementaryTypeName",
+                "src": "314:4:0"
+              }
+            ],
+            "id": 14,
+            "name": "VariableDeclaration",
+            "src": "314:24:0"
+          },
+          {
+            "attributes": {
+              "canonicalName": "Tickets.Guests",
+              "name": "Guests",
+              "scope": 73,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "guest_hash",
+                  "scope": 23,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
+                    },
+                    "id": 15,
+                    "name": "ElementaryTypeName",
+                    "src": "530:7:0"
+                  }
+                ],
+                "id": 16,
+                "name": "VariableDeclaration",
+                "src": "530:18:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "guest_name",
+                  "scope": 23,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string storage pointer",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string storage pointer"
+                    },
+                    "id": 17,
+                    "name": "ElementaryTypeName",
+                    "src": "576:6:0"
+                  }
+                ],
+                "id": 18,
+                "name": "VariableDeclaration",
+                "src": "576:17:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "number_guests",
+                  "scope": 23,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 19,
+                    "name": "ElementaryTypeName",
+                    "src": "617:4:0"
+                  }
+                ],
+                "id": 20,
+                "name": "VariableDeclaration",
+                "src": "617:18:0"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "purchased",
+                  "scope": 23,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "bool",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "bool",
+                      "type": "bool"
+                    },
+                    "id": 21,
+                    "name": "ElementaryTypeName",
+                    "src": "675:4:0"
+                  }
+                ],
+                "id": 22,
+                "name": "VariableDeclaration",
+                "src": "675:14:0"
+              }
+            ],
+            "id": 23,
+            "name": "StructDefinition",
+            "src": "455:278:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "guest_list",
+              "scope": 73,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "struct Tickets.Guests storage ref[] storage ref",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "length": null,
+                  "type": "struct Tickets.Guests storage ref[] storage pointer"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "Guests",
+                      "referencedDeclaration": 23,
+                      "type": "struct Tickets.Guests storage pointer"
+                    },
+                    "id": 24,
+                    "name": "UserDefinedTypeName",
+                    "src": "735:6:0"
+                  }
+                ],
+                "id": 25,
+                "name": "ArrayTypeName",
+                "src": "735:9:0"
+              }
+            ],
+            "id": 26,
+            "name": "VariableDeclaration",
+            "src": "735:27:0"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "TicketsPurchased"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "_guests",
+                      "scope": 34,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 27,
+                        "name": "ElementaryTypeName",
+                        "src": "816:4:0"
+                      }
+                    ],
+                    "id": 28,
+                    "name": "VariableDeclaration",
+                    "src": "816:12:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "_purchaser",
+                      "scope": 34,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 29,
+                        "name": "ElementaryTypeName",
+                        "src": "830:7:0"
+                      }
+                    ],
+                    "id": 30,
+                    "name": "VariableDeclaration",
+                    "src": "830:18:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "_name",
+                      "scope": 34,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 31,
+                        "name": "ElementaryTypeName",
+                        "src": "851:6:0"
+                      }
+                    ],
+                    "id": 32,
+                    "name": "VariableDeclaration",
+                    "src": "851:12:0"
+                  }
+                ],
+                "id": 33,
+                "name": "ParameterList",
+                "src": "815:49:0"
+              }
+            ],
+            "id": 34,
+            "name": "EventDefinition",
+            "src": "793:72:0"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "PartyOn"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "_message",
+                      "scope": 38,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 35,
+                        "name": "ElementaryTypeName",
+                        "src": "914:6:0"
+                      }
+                    ],
+                    "id": 36,
+                    "name": "VariableDeclaration",
+                    "src": "914:15:0"
+                  }
+                ],
+                "id": 37,
+                "name": "ParameterList",
+                "src": "913:17:0"
+              }
+            ],
+            "id": 38,
+            "name": "EventDefinition",
+            "src": "900:31:0"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "FullHouse"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "_message",
+                      "scope": 42,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 39,
+                        "name": "ElementaryTypeName",
+                        "src": "1008:6:0"
+                      }
+                    ],
+                    "id": 40,
+                    "name": "VariableDeclaration",
+                    "src": "1008:15:0"
+                  }
+                ],
+                "id": 41,
+                "name": "ParameterList",
+                "src": "1007:17:0"
+              }
+            ],
+            "id": 42,
+            "name": "EventDefinition",
+            "src": "992:33:0"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "name": "Tickets",
+              "payable": false,
+              "scope": 73,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "max",
+                      "scope": 72,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 43,
+                        "name": "ElementaryTypeName",
+                        "src": "1096:4:0"
+                      }
+                    ],
+                    "id": 44,
+                    "name": "VariableDeclaration",
+                    "src": "1096:8:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "min",
+                      "scope": 72,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 45,
+                        "name": "ElementaryTypeName",
+                        "src": "1106:4:0"
+                      }
+                    ],
+                    "id": 46,
+                    "name": "VariableDeclaration",
+                    "src": "1106:8:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "price",
+                      "scope": 72,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 47,
+                        "name": "ElementaryTypeName",
+                        "src": "1116:4:0"
+                      }
+                    ],
+                    "id": 48,
+                    "name": "VariableDeclaration",
+                    "src": "1116:10:0"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "time",
+                      "scope": 72,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 49,
+                        "name": "ElementaryTypeName",
+                        "src": "1128:4:0"
+                      }
+                    ],
+                    "id": 50,
+                    "name": "VariableDeclaration",
+                    "src": "1128:9:0"
+                  }
+                ],
+                "id": 51,
+                "name": "ParameterList",
+                "src": "1095:43:0"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 54,
+                "name": "ParameterList",
+                "src": "1149:0:0"
+              },
+              {
+                "attributes": {
+                  "arguments": [
+                    null
+                  ]
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 97,
+                      "type": "modifier ()",
+                      "value": "onlyOwner"
+                    },
+                    "id": 52,
+                    "name": "Identifier",
+                    "src": "1139:9:0"
+                  }
+                ],
+                "id": 53,
+                "name": "ModifierInvocation",
+                "src": "1139:9:0"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 8,
+                              "type": "uint256",
+                              "value": "max_headcount"
+                            },
+                            "id": 55,
+                            "name": "Identifier",
+                            "src": "1152:13:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 44,
+                              "type": "uint256",
+                              "value": "max"
+                            },
+                            "id": 56,
+                            "name": "Identifier",
+                            "src": "1168:3:0"
+                          }
+                        ],
+                        "id": 57,
+                        "name": "Assignment",
+                        "src": "1152:19:0"
+                      }
+                    ],
+                    "id": 58,
+                    "name": "ExpressionStatement",
+                    "src": "1152:19:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 10,
+                              "type": "uint256",
+                              "value": "min_headcount"
+                            },
+                            "id": 59,
+                            "name": "Identifier",
+                            "src": "1175:13:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 46,
+                              "type": "uint256",
+                              "value": "min"
+                            },
+                            "id": 60,
+                            "name": "Identifier",
+                            "src": "1191:3:0"
+                          }
+                        ],
+                        "id": 61,
+                        "name": "Assignment",
+                        "src": "1175:19:0"
+                      }
+                    ],
+                    "id": 62,
+                    "name": "ExpressionStatement",
+                    "src": "1175:19:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 14,
+                              "type": "uint256",
+                              "value": "ticket_price"
+                            },
+                            "id": 63,
+                            "name": "Identifier",
+                            "src": "1198:12:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 48,
+                              "type": "uint256",
+                              "value": "price"
+                            },
+                            "id": 64,
+                            "name": "Identifier",
+                            "src": "1213:5:0"
+                          }
+                        ],
+                        "id": 65,
+                        "name": "Assignment",
+                        "src": "1198:20:0"
+                      }
+                    ],
+                    "id": 66,
+                    "name": "ExpressionStatement",
+                    "src": "1198:20:0"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 12,
+                              "type": "uint256",
+                              "value": "party_time"
+                            },
+                            "id": 67,
+                            "name": "Identifier",
+                            "src": "1222:10:0"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 50,
+                              "type": "uint256",
+                              "value": "time"
+                            },
+                            "id": 68,
+                            "name": "Identifier",
+                            "src": "1235:4:0"
+                          }
+                        ],
+                        "id": 69,
+                        "name": "Assignment",
+                        "src": "1222:17:0"
+                      }
+                    ],
+                    "id": 70,
+                    "name": "ExpressionStatement",
+                    "src": "1222:17:0"
+                  }
+                ],
+                "id": 71,
+                "name": "Block",
+                "src": "1149:94:0"
+              }
+            ],
+            "id": 72,
+            "name": "FunctionDefinition",
+            "src": "1078:165:0"
+          }
+        ],
+        "id": 73,
+        "name": "ContractDefinition",
+        "src": "49:1864:0"
+      }
+    ],
+    "id": 74,
+    "name": "SourceUnit",
+    "src": "0:1914:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-01-07T20:45:29.521Z"
+}

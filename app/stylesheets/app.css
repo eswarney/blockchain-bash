@@ -1,8 +1,8 @@
 body {
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 10%;
-  font-family: "Open Sans", sans-serif;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 label {
@@ -17,26 +17,49 @@ input {
 }
 
 button {
-  font-size: 16px;
-  padding: 5px;
+  font-size: 18px;
+  padding: 10px;
+  background-color: #78a4fc;
+  color:#fff;
+  width: 150px;
+
 }
 
 h1, h2 {
-  display: inline-block;
+  font-family: 'Source Sans Pro', sans-serif;
   vertical-align: middle;
   margin-top: 0px;
   margin-bottom: 10px;
+  text-align: center; 
+}
+
+h1{
+  font-size: 44px;
+  text-align: center; 
+  font-weight: 900;
 }
 
 h2 {
-  color: #AAA;
+  color: #78a4fc;
   font-size: 32px;
 }
 
 h3 {
   font-weight: normal;
-  color: #AAA;
+  color: #6d6d6d;
   font-size: 24px;
+  display: inline-block;
+}
+
+h4{
+  color: black;
+  font-size: 20px;
+  display: inline-block;
+}
+
+p{
+  padding-left: 7px;
+  display:inline-block;
 }
 
 .black {
@@ -49,4 +72,10 @@ h3 {
 
 .hint {
   color: #666;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
