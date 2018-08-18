@@ -1431,8 +1431,15 @@
         "ConvertLib": "0xe51358959187adc0d5a1bc66bcc2e125a09c6f04"
       },
       "address": "0x778e9fadf21bde419679964db058b4c3743e9d69"
+    },
+    "1532284805805": {
+      "events": {},
+      "links": {
+        "ConvertLib": "0x37df7306947331e2b629a18fb6212ec5d9a1978b"
+      },
+      "address": "0xa3a982b189b79cfbe80b4307a748ef004da49524"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-07T20:33:39.889Z"
+  "updatedAt": "2018-07-22T18:40:14.098Z"
 }

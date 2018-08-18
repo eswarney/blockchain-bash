@@ -7,15 +7,21 @@ import { default as contract } from 'truffle-contract'
 
 // Import our contract artifacts and turn them into usable abstractions.
 import metacoin_artifacts from '../../build/contracts/MetaCoin.json'
+import administrator_artifacts from '../../build/contracts/Administrator.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 var MetaCoin = contract(metacoin_artifacts);
+var Administrator = contract(administrator_artifacts); 
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
 // For application bootstrapping, check out window.addEventListener below.
+var DateTimePicker = require('date-time-picker')
+
 var accounts;
 var account;
+
+//var partyDate = null; 
 
 window.App = {
   start: function() {
@@ -38,6 +44,8 @@ window.App = {
 
       accounts = accs;
       account = accounts[0];
+      picker.show()
+
 
       self.refreshBalance();
     });
@@ -62,6 +70,18 @@ window.App = {
       console.log(e);
       self.setStatus("Error getting balance; see log.");
     });
+  },
+
+  showDatePicker: function () {
+    var datePicker = new DateTimePicker.Date()
+    datePicker.on('selected', function (formatDate, now) {
+
+      var status = document.getElementById("partyDate");
+      status.innerHTML = now;
+    })
+    datePicker.on('cleared', function () {
+      // clicked clear btn
+    })
   },
 
   sendCoin: function() {

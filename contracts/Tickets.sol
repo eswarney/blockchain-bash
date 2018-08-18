@@ -28,7 +28,7 @@ event PartyOn(string _message); //signals when min headcount has been met, let's
 event FullHouse(string _message); // signals when tickets have been sold out (lit) 
 
 
-function Tickets (uint max, uint min, uint price, uint time) onlyOwner {
+function Tickets (uint max, uint min, uint price, uint time) {
 	max_headcount = max; 
 	min_headcount = min; 
 	ticket_price = price; 

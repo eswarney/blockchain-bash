@@ -35,6 +35,7 @@
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
+    "date-time-picker": "^0.5.2",
     "ethereum.js": "^0.2.4"
   }
 }
